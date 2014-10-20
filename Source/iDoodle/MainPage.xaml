@@ -37,12 +37,12 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<local:DoodleBoard x:Name="board" BoardBrush="#FFCFCFCF" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2"/>
-		<Border BorderThickness="5" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" Opacity="0.7" IsHitTestVisible="False" Grid.Row="1" Grid.RowSpan="2">
-			<Image x:Name="previewWnd"/>
+		<Border x:Name="previewWnd" Visibility="Collapsed" BorderThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Grid.Row="1" Grid.RowSpan="2" BorderBrush="Black">
+			<Image x:Name="previewImg"/>
 		</Border>
 		<StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Background="{StaticResource PhoneChromeBrush}">
 			<Button Click="Btn_PenWidth_Click" Width="50" Margin="0,5" Content="&#xE1C2;" ToolTipService.ToolTip="{Binding Path=LocalizedResources.ToolTip_Button_PenWidth, Source={StaticResource LocalizedStrings}}"/>
-			<Button Click="Btn_PenColor_Click" Width="50" Margin="20,5" Content="&#xE1CB;"/>
+			<Button Click="Btn_PenColor_Click" Width="50" Margin="20,5" Content="&#xE1CB;" ToolTipService.ToolTip="点击改变画刷颜色"/>
 			<Button Click="Btn_PenOpacity_Click" Width="50" Margin="0,5"/>
 			<Button Width="50" Margin="20,5"/>
 		</StackPanel>

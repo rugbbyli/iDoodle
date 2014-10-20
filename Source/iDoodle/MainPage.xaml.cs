@@ -57,11 +57,20 @@ namespace iDoodle
 
         private void Btn_Refresh_Click(object sender, EventArgs e)
         {
-            var bmp = board.GetImage();
+			if (previewWnd.Visibility == System.Windows.Visibility.Collapsed)
+			{
+				var bmp = board.GetImage();
 
-            previewWnd.Height = bmp.PixelHeight / 4;
-            previewWnd.Width = bmp.PixelWidth / 4;
-            previewWnd.Source = bmp;
+				previewImg.Height = bmp.PixelHeight / 2;
+				previewImg.Width = bmp.PixelWidth / 2;
+				previewImg.Source = bmp;
+
+				previewWnd.Visibility = System.Windows.Visibility.Visible;
+			}
+			else
+			{
+				previewWnd.Visibility = System.Windows.Visibility.Collapsed;
+			}
         }
 
         private void Btn_PenWidth_Click(object sender, RoutedEventArgs e)
