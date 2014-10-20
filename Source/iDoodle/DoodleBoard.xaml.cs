@@ -62,9 +62,9 @@ namespace iDoodle
             geo.Figures.Add(fig);
             path = new Path();
             path.Data = geo;
-            path.Fill = this.PenFill;
-            path.Stroke = this.PenStroke;
-            path.Opacity = this.PenOpacity;
+            //path.Fill = this.PenFill;
+            path.Stroke = this.IsRubberOpen ? this.LayoutRoot.Background : this.PenStroke;
+            path.Opacity = this.IsRubberOpen ? 1 : this.PenOpacity;
             path.StrokeThickness = this.PenWidth;
             path.StrokeEndLineCap = PenLineCap.Round;
             path.StrokeStartLineCap = PenLineCap.Round;
@@ -172,6 +172,7 @@ namespace iDoodle
         public void Clear()
         {
             LayoutRoot.Children.Clear();
+            StepStack.Clear();
             //PathRoot.Data = path;
         }
 
@@ -194,6 +195,8 @@ namespace iDoodle
         }
 
         public double PenOpacity { get; set; }
+
+        public bool IsRubberOpen { get; set; }
 
         #endregion
     }

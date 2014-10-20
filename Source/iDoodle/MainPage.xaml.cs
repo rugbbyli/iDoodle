@@ -61,8 +61,8 @@ namespace iDoodle
 			{
 				var bmp = board.GetImage();
 
-				previewImg.Height = bmp.PixelHeight / 2;
-				previewImg.Width = bmp.PixelWidth / 2;
+				previewImg.Height = bmp.PixelHeight / 1;
+				previewImg.Width = bmp.PixelWidth / 1;
 				previewImg.Source = bmp;
 
 				previewWnd.Visibility = System.Windows.Visibility.Visible;
@@ -157,6 +157,11 @@ namespace iDoodle
             ease.EasingMode = EasingMode.EaseOut;
             ease.Exponent = 5;
             
+        }
+
+        private void Btn_Rubber_StateChanged(object sender, RoutedEventArgs e)
+        {
+            board.IsRubberOpen = (sender as System.Windows.Controls.Primitives.ToggleButton).IsChecked.Value;
         }
     }
 

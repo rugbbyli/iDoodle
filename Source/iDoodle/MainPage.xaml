@@ -13,65 +13,64 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-	<phone:PhoneApplicationPage.Resources>
-		<local:LocalizedStrings x:Key="LocalizedStrings"/>
-	</phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.Resources>
+        <local:LocalizedStrings x:Key="LocalizedStrings"/>
+    </phone:PhoneApplicationPage.Resources>
 
-	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar Opacity="0.8">
-			<shell:ApplicationBar.MenuItems>
-				<shell:ApplicationBarMenuItem Text="save doodle to phone" Click="Btn_Save_Click"/>
-				<shell:ApplicationBarMenuItem Text="Open Picture to doodle" Click="Btn_Open_Click"/>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Opacity="0.2" IsVisible="True" Mode="Default" ForegroundColor="{StaticResource PhoneAccentColor}">
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="save doodle to phone" Click="Btn_Save_Click"/>
+                <shell:ApplicationBarMenuItem Text="Open Picture to doodle" Click="Btn_Open_Click"/>
 
-			</shell:ApplicationBar.MenuItems>
-			<shell:ApplicationBarIconButton Click="Btn_Back_Click" Text="undo" IconUri="/Assets/AppBar/back.png" />
-			<shell:ApplicationBarIconButton Click="Btn_Next_Click" Text="redo" IconUri="/Assets/AppBar/next.png"/>
-			<shell:ApplicationBarIconButton Click="Btn_Clear_Click" Text="clear" IconUri="/Assets/AppBar/delete.png"/>
-			<shell:ApplicationBarIconButton Click="Btn_Refresh_Click" Text="preview" IconUri="/Assets/AppBar/refresh.png"/>
-		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
-	<Grid x:Name="LayoutRoot">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="60"/>
-			<RowDefinition Height="60"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<local:DoodleBoard x:Name="board" BoardBrush="#FFCFCFCF" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2"/>
-		<Border x:Name="previewWnd" Visibility="Collapsed" BorderThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Grid.Row="1" Grid.RowSpan="2" BorderBrush="Black">
-			<Image x:Name="previewImg"/>
-		</Border>
-		<StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Background="{StaticResource PhoneChromeBrush}">
-			<Button Click="Btn_PenWidth_Click" Width="50" Margin="0,5" Content="&#xE1C2;" ToolTipService.ToolTip="{Binding Path=LocalizedResources.ToolTip_Button_PenWidth, Source={StaticResource LocalizedStrings}}"/>
-			<Button Click="Btn_PenColor_Click" Width="50" Margin="20,5" Content="&#xE1CB;" ToolTipService.ToolTip="点击改变画刷颜色"/>
-			<Button Click="Btn_PenOpacity_Click" Width="50" Margin="0,5"/>
-			<Button Width="50" Margin="20,5"/>
-		</StackPanel>
+            </shell:ApplicationBar.MenuItems>
+            <shell:ApplicationBarIconButton Click="Btn_Back_Click" Text="undo" IconUri="/Assets/AppBar/back.png" />
+            <shell:ApplicationBarIconButton Click="Btn_Next_Click" Text="redo" IconUri="/Assets/AppBar/next.png"/>
+            <shell:ApplicationBarIconButton Click="Btn_Clear_Click" Text="clear" IconUri="/Assets/AppBar/delete.png"/>
+            <shell:ApplicationBarIconButton Click="Btn_Refresh_Click" Text="preview" IconUri="/Assets/AppBar/refresh.png"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:DoodleBoard x:Name="board" BoardBrush="{StaticResource PhoneChromeBrush}" HorizontalAlignment="Stretch" Grid.Row="1" Grid.RowSpan="2"/>
+        <Border x:Name="previewWnd" Visibility="Collapsed" BorderThickness="5" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Grid.Row="1" Grid.RowSpan="2" BorderBrush="Black">
+            <Image x:Name="previewImg"/>
+        </Border>
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal" Background="{StaticResource PhoneChromeBrush}">
+            <Button Click="Btn_PenWidth_Click" Width="50" Margin="0,5" Content="&#xE1C2;" ToolTipService.ToolTip="{Binding Path=LocalizedResources.ToolTip_Button_PenWidth, Source={StaticResource LocalizedStrings}}"/>
+            <Button Click="Btn_PenColor_Click" Width="50" Margin="20,5" Content="&#xE1CB;" ToolTipService.ToolTip="点击改变画刷颜色"/>
+            <Button Click="Btn_PenOpacity_Click" Width="50" Margin="0,5"/>
+            <ToggleButton Checked="Btn_Rubber_StateChanged" Unchecked="Btn_Rubber_StateChanged" Width="50" Margin="20,5" Content="&#xE25A;" Style="{StaticResource ToggleButtonStyle}" FontSize="30"/>
+        </StackPanel>
 
-		<Slider x:Name="Slider_PW" ValueChanged="Slider_PW_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="2" Margin="0" Background="#FF727272" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Red" Visibility="Collapsed">
-			<Slider.RenderTransform>
-				<CompositeTransform Rotation="180"/>
-			</Slider.RenderTransform>
-		</Slider>
-
-		<Slider x:Name="Slider_PC" ValueChanged="Slider_PC_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="6" Margin="70,0,0,0" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Black" Visibility="Collapsed">
-			<Slider.RenderTransform>
-				<CompositeTransform Rotation="180"/>
-			</Slider.RenderTransform>
-			<Slider.Background>
-				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-					<GradientStop Color="Black" Offset="0.166"/>
-					<GradientStop Color="Green" Offset="0.167"/>
-					<GradientStop Color="Green" Offset="0.326"/>
-					<GradientStop Color="Blue" Offset="0.327"/>
-					<GradientStop Color="Blue" Offset="0.495"/>
-					<GradientStop Color="Yellow" Offset="0.496"/>
-					<GradientStop Color="Yellow" Offset="0.662"/>
-					<GradientStop Color="Red" Offset="0.663"/>
-					<GradientStop Color="Red" Offset="0.829"/>
-					<GradientStop Color="White" Offset="0.830"/>
-				</LinearGradientBrush>
-			</Slider.Background>
-			<!--<Slider.Foreground>
+        <Slider x:Name="Slider_PW" ValueChanged="Slider_PW_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="2" Margin="0" Background="#FF727272" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Red" Visibility="Collapsed">
+            <Slider.RenderTransform>
+                <CompositeTransform Rotation="180"/>
+            </Slider.RenderTransform>
+        </Slider>
+        <Slider x:Name="Slider_PC" ValueChanged="Slider_PC_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="6" Margin="70,0,0,0" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Black" Visibility="Collapsed">
+            <Slider.RenderTransform>
+                <CompositeTransform Rotation="180"/>
+            </Slider.RenderTransform>
+            <Slider.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0.166"/>
+                    <GradientStop Color="Green" Offset="0.167"/>
+                    <GradientStop Color="Green" Offset="0.326"/>
+                    <GradientStop Color="Blue" Offset="0.327"/>
+                    <GradientStop Color="Blue" Offset="0.495"/>
+                    <GradientStop Color="Yellow" Offset="0.496"/>
+                    <GradientStop Color="Yellow" Offset="0.662"/>
+                    <GradientStop Color="Red" Offset="0.663"/>
+                    <GradientStop Color="Red" Offset="0.829"/>
+                    <GradientStop Color="White" Offset="0.830"/>
+                </LinearGradientBrush>
+            </Slider.Background>
+            <!--<Slider.Foreground>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0.166"/>
                     <GradientStop Color="Green" Offset="0.167"/>
@@ -85,11 +84,11 @@
                     <GradientStop Color="White" Offset="0.830"/>
                 </LinearGradientBrush>
             </Slider.Foreground>-->
-		</Slider>
-		<Slider x:Name="Slider_PO" ValueChanged="Slider_PO_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="6" Margin="140,0,0,0" Background="#FF727272" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Red" Visibility="Collapsed">
-			<Slider.RenderTransform>
-				<CompositeTransform Rotation="180"/>
-			</Slider.RenderTransform>
-		</Slider>
-	</Grid>
+        </Slider>
+        <Slider x:Name="Slider_PO" ValueChanged="Slider_PO_Changed" Grid.Row="1" Minimum="1" Maximum="6" Value="6" Margin="140,0,0,0" Background="#FF727272" Style="{StaticResource SliderStyle1}" SmallChange="1" Orientation="Vertical" HorizontalAlignment="Left" Width="50" VerticalAlignment="Top" Height="150" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" Foreground="Red" Visibility="Collapsed">
+            <Slider.RenderTransform>
+                <CompositeTransform Rotation="180"/>
+            </Slider.RenderTransform>
+        </Slider>
+    </Grid>
 </phone:PhoneApplicationPage>
